@@ -1,0 +1,24 @@
+# Usa a imagem oficial leve do Python 3.12
+FROM python:3.12-slim
+
+# Define o diretório de trabalho dentro do container
+WORKDIR /app
+
+# Instala dependências do sistema necessárias para compilar pacotes se preciso
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instala as dependências do Python
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia o código da aplicação
+COPY . .
+
+# Expõe a porta padrão do Django
+EXPOSE 8000
+
+# Executa o servidor de desenvolvimento do Django escutando em todas as interfaces
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
