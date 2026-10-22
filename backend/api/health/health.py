@@ -5,9 +5,9 @@ def health_check(type_request):
     data = {
         "status" : 200,
         "items" : [
-            "Configurar docker"
-            "Automatizar CI"
-            "Publicar no GHCR"
+            "Configurar docker",
+            "Automatizar CI",
+            "Publicar no GHCR", 
         ]
 
     }
